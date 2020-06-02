@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto hidden-xs">
 
           <router-link tag="li" class="nav-item" exact to="/" active-class="active">
             <a class="nav-link">Главная</a>

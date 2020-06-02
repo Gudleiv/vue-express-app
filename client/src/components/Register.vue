@@ -1,14 +1,14 @@
 <template>
   <transition name="fade" mode="out-in">
     <div v-if="regForm" class="form" key="register">
-      <form class="register-form">
+      <form class="register-form" autocomplete="off">
         <h2>Регистрация</h2>
         <input v-model="email" type="email" placeholder="Email"/>
         <input v-model="password" type="password" placeholder="Пароль"/>
         <input v-model="passwordConfirm" type="password" placeholder="Подтверждение пароля"/>
         <div class="error" v-html="error" />
-        <button @click="register">Создать</button>
-        <p class="message">Уже зарегестрированы? <a href="#" @click="formSwitch">Войти</a></p>
+        <button @click="register">Создать аккаунт</button>
+        <p class="message">Уже зарегистрированы? <a href="#" @click="formSwitch">Войти</a></p>
       </form>
     </div>
     <div v-else class="form" key="login">
@@ -16,8 +16,9 @@
         <h2>Вход</h2>
         <input v-model="email" type="email" placeholder="Email"/>
         <input v-model="password" type="password" placeholder="Пароль"/>
-        <button>Войти</button>
-        <p class="message">Не зарегестрированы? <a href="#" @click="formSwitch">Создать аккаунт</a></p>
+        <div class="error" v-html="error" />
+        <button @click="login">Войти</button>
+        <p class="message">Не зарегистрированы? <a href="#" @click="formSwitch">Создать аккаунт</a></p>
       </form>
     </div>
   </transition>
@@ -49,6 +50,20 @@ export default {
         else this.error = 'Server shutdown'
       }
     },
+
+    async login () {
+      this.error = null
+      try {
+        await AuthenticationService.login({
+          email: this.email,
+          password: this.password
+        })
+      } catch (e) {
+        if (e) this.error = e.response.data.error
+        else this.error = 'Server shutdown'
+      }
+    },
+
     formSwitch () {
       this.regForm = !this.regForm
       this.email = ''
