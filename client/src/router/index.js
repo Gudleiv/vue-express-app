@@ -1,21 +1,21 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+// import Vue from 'vue'
+
+import VueRouter from 'vue-router'
+import Main from '@/components/HelloWorld'
 import Register from '@/components/Register'
 
-Vue.use(Router)
-
-export default new Router({
+export default new VueRouter({
   routes: [
     {
       path: '/',
       name: 'Main',
-      component: HelloWorld
+      component: Main
     },
     {
       path: '/register',
       name: 'register',
       component: Register
     }
-  ]
+  ],
+  mode: 'history'
 })
