@@ -1,14 +1,13 @@
 <template>
     <div class="form">
-      <form @submit.prevent class="register-form" autocomplete="off">
-        <h2>Регистрация</h2>
+      <form @submit.prevent class="login-form">
+        <h2>Вход</h2>
         <input v-model="email" type="email" placeholder="Email"/>
         <input v-model="password" type="password" placeholder="Пароль"/>
-        <input v-model="passwordConfirm" type="password" placeholder="Подтверждение пароля"/>
         <div class="error" v-html="error" />
-        <button @click="register">Создать аккаунт</button>
-        <p class="message">Уже зарегистрированы?
-          <router-link tag="a" class="nav-item" to="/login">Войти</router-link>
+        <button @click="login">Войти</button>
+        <p class="message">Не зарегистрированы?
+          <router-link tag="a" class="nav-item" to="/signup">Создать аккаунт</router-link>
         </p>
       </form>
     </div>
@@ -22,15 +21,14 @@ export default {
     return {
       email: '',
       password: '',
-      passwordConfirm: '',
       error: null
     }
   },
   methods: {
-    async register () {
+    async login () {
       this.error = null
       try {
-        const response = await AuthenticationService.register({
+        const response = await AuthenticationService.login({
           email: this.email,
           password: this.password
         })

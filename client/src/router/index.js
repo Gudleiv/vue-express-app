@@ -1,8 +1,9 @@
 // import Vue from 'vue'
 
 import VueRouter from 'vue-router'
-import Main from '@/components/HelloWorld'
+import Main from '@/components/Main'
 import Register from '@/components/Register'
+import Login from '@/components/Login'
 
 export default new VueRouter({
   routes: [
@@ -12,9 +13,14 @@ export default new VueRouter({
       component: Main
     },
     {
-      path: '/register',
-      name: 'register',
+      path: '/signup',
+      name: 'signup',
       component: Register
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ],
   mode: 'history'
